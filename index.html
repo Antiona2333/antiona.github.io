@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>安缇欧娜的博客小站 ✨</title>
+    <style>
+        /* ===== 全局重置 & 基础 ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Comic Sans MS', 'Chalkboard SE', 'Segoe UI', cursive, sans-serif;
+            background: linear-gradient(145deg, #fff5f9 0%, #fce4ec 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #4a3b4a;
+            position: relative;
+        }
+
+        /* ===== 漂浮装饰 ===== */
+        .floating-deco {
+            position: fixed;
+            pointer-events: none;
+            z-index: 0;
+            font-size: 2.4rem;
+            opacity: 0.25;
+            animation: floatAround 18s infinite alternate ease-in-out;
+        }
+        .floating-deco:nth-child(1) {
+            top: 6%;
+            left: 3%;
+            animation-duration: 14s;
+            font-size: 3rem;
+        }
+        .floating-deco:nth-child(2) {
+            top: 15%;
+            right: 5%;
+            animation-duration: 20s;
+            animation-delay: 2s;
+            font-size: 2.2rem;
+        }
+        .floating-deco:nth-child(3) {
+            bottom: 20%;
+            left: 4%;
+            animation-duration: 16s;
+            animation-delay: 4s;
+            font-size: 2.8rem;
+        }
+        .floating-deco:nth-child(4) {
+            bottom: 12%;
+            right: 3%;
+            animation-duration: 22s;
+            animation-delay: 1s;
+            font-size: 2rem;
+        }
+        .floating-deco:nth-child(5) {
+            top: 45%;
+            left: 50%;
+            animation-duration: 19s;
+            animation-delay: 3s;
+            font-size: 3.2rem;
+            transform: translateX(-50%);
+        }
+
+        @keyframes floatAround {
+            0% {
+                transform: translate(0, 0) rotate(0deg) scale(1);
+            }
+            33% {
+                transform: translate(20px, -30px) rotate(8deg) scale(1.05);
+            }
+            66% {
+                transform: translate(-15px, 25px) rotate(-6deg) scale(0.95);
+            }
+            100% {
+                transform: translate(10px, -10px) rotate(4deg) scale(1.02);
+            }
+        }
+
+        /* ===== 主容器 ===== */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ===== 头部 ===== */
+        .header {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-radius: 48px 48px 32px 32px;
+            padding: 28px 36px 24px;
+            box-shadow: 0 12px 40px rgba(255, 150, 200, 0.18),
+                0 4px 16px rgba(255, 200, 220, 0.12);
+            border: 2px solid rgba(255, 255, 255, 0.6);
+            margin-bottom: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .header:hover {
+            box-shadow: 0 16px 48px rgba(255, 150, 200, 0.25);
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .avatar {
+            width: 62px;
+            height: 62px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ffb6d9, #ff85b3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            box-shadow: 0 4px 16px rgba(255, 130, 180, 0.35);
+            border: 3px solid #fff;
+            flex-shrink: 0;
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .avatar:hover {
+            transform: rotate(12deg) scale(1.08);
+        }
+
+        .brand-text h1 {
+            font-size: 26px;
+            font-weight: 700;
+            color: #6b4a6b;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 12px rgba(255, 180, 200, 0.3);
+        }
+
+        .brand-text h1 .sparkle {
+            display: inline-block;
+            animation: sparkle 2.4s infinite alternate;
+        }
+
+        @keyframes sparkle {
+            0%,
+            100% {
+                opacity: 0.6;
+                transform: scale(0.9);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.2);
+            }
+        }
+
+        .brand-text .sub {
+            font-size: 14px;
+            color: #b38bb3;
+            letter-spacing: 2px;
+            font-weight: 300;
+            display: block;
+            margin-top: 2px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            padding: 8px 20px;
+            border-radius: 40px;
+            background: rgba(255, 255, 255, 0.5);
+            color: #6b4a6b;
+            font-weight: 600;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            border: 1.5px solid transparent;
+            backdrop-filter: blur(4px);
+        }
+
+        .nav-links a:hover {
+            background: #ffb6d9;
+            color: #fff;
+            transform: translateY(-3px) scale(1.03);
+            box-shadow: 0 8px 24px rgba(255, 150, 200, 0.3);
+            border-color: #ff8eb5;
+        }
+
+        .nav-links a.active {
+            background: #ff85b3;
+            color: #fff;
+            border-color: #ff6fa3;
+            box-shadow: 0 4px 16px rgba(255, 130, 180, 0.3);
+        }
+
+        /* ===== 欢迎横幅 ===== */
+        .welcome-banner {
+            background: linear-gradient(135deg, #ffe8f0, #ffd6e8);
+            border-radius: 40px;
+            padding: 28px 34px;
+            margin-bottom: 32px;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 6px 24px rgba(255, 180, 210, 0.15);
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .welcome-banner .greet {
+            font-size: 18px;
+            color: #5a3f5a;
+        }
+
+        .welcome-banner .greet strong {
+            color: #c44a8a;
+            font-size: 20px;
+        }
+
+        .welcome-banner .greet .emoji-big {
+            font-size: 28px;
+            display: inline-block;
+            animation: wave 2.6s infinite;
+        }
+
+        @keyframes wave {
+            0%,
+            100% {
+                transform: rotate(0deg);
+            }
+            25% {
+                transform: rotate(12deg);
+            }
+            75% {
+                transform: rotate(-8deg);
+            }
+        }
+
+        .welcome-banner .date-display {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(8px);
+            padding: 10px 22px;
+            border-radius: 40px;
+            font-size: 15px;
+            color: #6b4a6b;
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 2px 12px rgba(255, 200, 220, 0.15);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .date-display .dot {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #ff85b3;
+            animation: pulse-dot 1.8s infinite;
+        }
+
+        @keyframes pulse-dot {
+            0%,
+            100% {
+                opacity: 0.4;
+                transform: scale(0.8);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.2);
+            }
+        }
+
+        /* ===== 主体布局 ===== */
+        .main-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 32px;
+            margin-bottom: 32px;
+        }
+
+        @media (max-width: 860px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ===== 文章卡片 ===== */
+        .section-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #6b4a6b;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-title .title-deco {
+            font-size: 24px;
+        }
+
+        .section-title::after {
+            content: '';
+            flex: 1;
+            height: 2px;
+            background: linear-gradient(90deg, #ffb6d9, transparent);
+            border-radius: 4px;
+        }
+
+        .post-card {
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 32px;
+            padding: 24px 28px;
+            margin-bottom: 22px;
+            border: 1.5px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 6px 24px rgba(255, 180, 210, 0.10);
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            cursor: default;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .post-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 120px;
+            height: 120px;
+            background: radial-gradient(circle, rgba(255, 200, 220, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .post-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 16px 48px rgba(255, 150, 200, 0.18);
+            border-color: rgba(255, 150, 200, 0.3);
+        }
+
+        .post-card .post-meta {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            font-size: 13px;
+            color: #b38bb3;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+        }
+
+        .post-card .post-meta .tag {
+            background: #ffd6e8;
+            padding: 2px 16px;
+            border-radius: 30px;
+            font-size: 12px;
+            color: #8f5a8f;
+            font-weight: 600;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .post-card h3 {
+            font-size: 20px;
+            color: #4a2f4a;
+            margin-bottom: 10px;
+            font-weight: 700;
+            transition: color 0.3s;
+        }
+
+        .post-card:hover h3 {
+            color: #c44a8a;
+        }
+
+        .post-card p {
+            color: #6b4a6b;
+            line-height: 1.7;
+            font-size: 15px;
+            opacity: 0.85;
+        }
+
+        .post-card .read-more {
+            display: inline-block;
+            margin-top: 14px;
+            color: #c44a8a;
+            font-weight: 600;
+            font-size: 14px;
+            text-decoration: none;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .post-card .read-more:hover {
+            border-bottom-color: #ff85b3;
+            transform: translateX(4px);
+        }
+
+        .post-card .post-emoji {
+            position: absolute;
+            bottom: 16px;
+            right: 20px;
+            font-size: 28px;
+            opacity: 0.2;
+            pointer-events: none;
+            transition: opacity 0.4s, transform 0.4s;
+        }
+
+        .post-card:hover .post-emoji {
+            opacity: 0.5;
+            transform: rotate(8deg) scale(1.1);
+        }
+
+        /* ===== 侧边栏 ===== */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 28px;
+        }
+
+        .sidebar-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 32px;
+            padding: 24px 26px;
+            border: 1.5px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 6px 24px rgba(255, 180, 210, 0.08);
+            transition: transform 0.3s ease;
+        }
+
+        .sidebar-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .sidebar-card .card-title {
+            font-size: 17px;
+            font-weight: 700;
+            color: #6b4a6b;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .sidebar-card .card-title::after {
+            content: '';
+            flex: 1;
+            height: 2px;
+            background: linear-gradient(90deg, #ffb6d9, transparent);
+            border-radius: 4px;
+        }
+
+        /* 关于我 */
+        .about-me {
+            text-align: center;
+        }
+
+        .about-me .mini-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ffb6d9, #ff85b3);
+            margin: 0 auto 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            box-shadow: 0 4px 20px rgba(255, 130, 180, 0.25);
+            border: 3px solid #fff;
+        }
+
+        .about-me h4 {
+            color: #4a2f4a;
+            font-size: 18px;
+            margin-bottom: 4px;
+        }
+
+        .about-me .bio {
+            font-size: 14px;
+            color: #8f6f8f;
+            line-height: 1.6;
+            margin-top: 6px;
+        }
+
+        .about-me .bio span {
+            display: inline-block;
+            animation: sparkle 2.8s infinite;
+        }
+
+        /* 标签云 */
+        .tag-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .tag-cloud .tag-item {
+            background: rgba(255, 200, 220, 0.35);
+            padding: 4px 18px;
+            border-radius: 30px;
+            font-size: 13px;
+            color: #6b4a6b;
+            font-weight: 500;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+            cursor: default;
+        }
+
+        .tag-cloud .tag-item:hover {
+            background: #ffb6d9;
+            color: #fff;
+            transform: scale(1.06);
+            box-shadow: 0 4px 16px rgba(255, 150, 200, 0.25);
+        }
+
+        /* 动态小卡片 */
+        .mood-card {
+            background: linear-gradient(135deg, #fff0f5, #ffe8f0);
+            border-radius: 24px;
+            padding: 18px 22px;
+            border: 1.5px solid rgba(255, 255, 255, 0.5);
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-top: 4px;
+        }
+
+        .mood-card .mood-emoji {
+            font-size: 34px;
+        }
+
+        .mood-card .mood-text {
+            font-size: 15px;
+            color: #5a3f5a;
+            line-height: 1.5;
+        }
+
+        .mood-card .mood-text small {
+            display: block;
+            font-size: 12px;
+            color: #b38bb3;
+            margin-top: 2px;
+        }
+
+        /* ===== 页脚 ===== */
+        .footer {
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 40px 40px 24px 24px;
+            padding: 22px 34px;
+            text-align: center;
+            border: 1.5px solid rgba(255, 255, 255, 0.4);
+            margin-top: 12px;
+            color: #8f6f8f;
+            font-size: 14px;
+        }
+
+        .footer .footer-heart {
+            color: #ff6fa3;
+            display: inline-block;
+            animation: heartBeat 1.6s infinite;
+        }
+
+        @keyframes heartBeat {
+            0%,
+            100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.25);
+            }
+        }
+
+        .footer .footer-links {
+            margin-top: 8px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .footer .footer-links a {
+            color: #b38bb3;
+            text-decoration: none;
+            font-size: 13px;
+            transition: color 0.3s;
+        }
+
+        .footer .footer-links a:hover {
+            color: #c44a8a;
+        }
+
+        /* ===== 响应式 ===== */
+        @media (max-width: 700px) {
+            .header {
+                flex-direction: column;
+                align-items: stretch;
+                text-align: center;
+                padding: 24px 20px;
+                border-radius: 32px;
+            }
+            .brand {
+                justify-content: center;
+            }
+            .nav-links {
+                justify-content: center;
+            }
+            .welcome-banner {
+                flex-direction: column;
+                text-align: center;
+                padding: 22px 20px;
+            }
+            .post-card {
+                padding: 20px;
+            }
+            .sidebar-card {
+                padding: 20px;
+            }
+            .floating-deco {
+                display: none;
+            }
+        }
+
+        @media (max-width: 420px) {
+            body {
+                padding: 12px;
+            }
+            .brand-text h1 {
+                font-size: 20px;
+            }
+            .post-card h3 {
+                font-size: 17px;
+            }
+            .nav-links a {
+                padding: 6px 14px;
+                font-size: 13px;
+            }
+        }
+
+        /* ===== 滚动条 ===== */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #fce4ec;
+            border-radius: 20px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #ffb6d9;
+            border-radius: 20px;
+            border: 2px solid #fce4ec;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #ff85b3;
+        }
+
+        /* ===== JS 交互：点击文章弹出小提示 ===== */
+        .toast-message {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(80px);
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(16px);
+            padding: 14px 32px;
+            border-radius: 60px;
+            box-shadow: 0 12px 40px rgba(255, 130, 180, 0.2);
+            border: 1.5px solid rgba(255, 255, 255, 0.6);
+            font-size: 15px;
+            color: #4a2f4a;
+            font-weight: 500;
+            opacity: 0;
+            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            z-index: 999;
+            pointer-events: none;
+            white-space: nowrap;
+        }
+
+        .toast-message.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        @media (max-width: 500px) {
+            .toast-message {
+                white-space: normal;
+                max-width: 90%;
+                text-align: center;
+                font-size: 14px;
+                padding: 12px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== 漂浮装饰 ===== -->
+    <div class="floating-deco">🌸</div>
+    <div class="floating-deco">🦋</div>
+    <div class="floating-deco">☁️</div>
+    <div class="floating-deco">🍬</div>
+    <div class="floating-deco">✨</div>
+
+    <!-- ===== 主容器 ===== -->
+    <div class="container">
+
+        <!-- ===== 头部 ===== -->
+        <header class="header">
+            <div class="brand">
+                <div class="avatar">🧸</div>
+                <div class="brand-text">
+                    <h1>
+                        安缇欧娜的博客小站
+                        <span class="sparkle">✨</span>
+                    </h1>
+                    <span class="sub">～ 藏在糖果罐子里的碎碎念 ～</span>
+                </div>
+            </div>
+            <nav class="nav-links">
+                <a href="#" class="active">🍬 首页</a>
+                <a href="#">📖 文章</a>
+                <a href="#">🎀 关于</a>
+                <a href="#">💌 留言</a>
+            </nav>
+        </header>
+
+        <!-- ===== 欢迎横幅 ===== -->
+        <div class="welcome-banner">
+            <div class="greet">
+                <span class="emoji-big">👋</span>
+                嗨嗨～ 欢迎来到 <strong>安缇欧娜</strong> 的小世界！
+                今天也要 <span style="color:#c44a8a;">✨ 闪闪发光 ✨</span> 哦！
+            </div>
+            <div class="date-display">
+                <span class="dot"></span>
+                <span id="currentDate">加载中...</span>
+            </div>
+        </div>
+
+        <!-- ===== 主体 ===== -->
+        <div class="main-grid">
+
+            <!-- ===== 左侧：文章列表 ===== -->
+            <main>
+                <div class="section-title">
+                    <span class="title-deco">📝</span> 最新小记
+                </div>
+
+                <!-- 文章 1 -->
+                <article class="post-card" data-title="今天也是软绵绵的一天">
+                    <div class="post-meta">
+                        <span>📅 2026-07-04</span>
+                        <span class="tag">🌸 日常</span>
+                        <span>💬 12 颗糖果</span>
+                    </div>
+                    <h3>☁️ 今天也是软绵绵的一天</h3>
+                    <p>
+                        早晨被窗外的鸟鸣叫醒，阳光透过蕾丝窗帘洒在枕头上，像是撒了一层金粉。
+                        泡了一杯热乎乎的蜂蜜牛奶，抱着毛绒熊坐在窗边发呆……
+                        啊，这样的日子真想一直一直过下去呀 🧸
+                    </p>
+                    <a class="read-more" data-article="今天也是软绵绵的一天">继续阅读 →</a>
+                    <span class="post-emoji">☁️</span>
+                </article>
+
+                <!-- 文章 2 -->
+                <article class="post-card" data-title="草莓味的小确幸">
+                    <div class="post-meta">
+                        <span>📅 2026-07-02</span>
+                        <span class="tag">🍓 美食</span>
+                        <span>💬 8 颗糖果</span>
+                    </div>
+                    <h3>🍓 草莓味的小确幸</h3>
+                    <p>
+                        今天路过街角那家甜品店，橱窗里的草莓蛋糕在向我招手！
+                        果断买了一块，配上一杯伯爵红茶，坐在窗边看行人匆匆。
+                        生活嘛，就是要用甜甜的东西来治愈呀 🍰
+                    </p>
+                    <a class="read-more" data-article="草莓味的小确幸">继续阅读 →</a>
+                    <span class="post-emoji">🍰</span>
+                </article>
+
+                <!-- 文章 3 -->
+                <article class="post-card" data-title="写给星星的诗">
+                    <div class="post-meta">
+                        <span>📅 2026-06-28</span>
+                        <span class="tag">🌙 幻想</span>
+                        <span>💬 15 颗糖果</span>
+                    </div>
+                    <h3>🌙 写给星星的诗</h3>
+                    <p>
+                        夜晚的天空像一块深蓝色的丝绒，上面缀满了亮晶晶的碎钻。
+                        我趴在窗台上，数着星星，想象每一颗都是一个未完成的梦。
+                        嘘—— 听说对着流星许愿，就会长出小翅膀哦 ✨
+                    </p>
+                    <a class="read-more" data-article="写给星星的诗">继续阅读 →</a>
+                    <span class="post-emoji">⭐</span>
+                </article>
+
+                <!-- 文章 4 -->
+                <article class="post-card" data-title="毛绒熊的下午茶">
+                    <div class="post-meta">
+                        <span>📅 2026-06-25</span>
+                        <span class="tag">🧸 治愈</span>
+                        <span>💬 6 颗糖果</span>
+                    </div>
+                    <h3>🧸 毛绒熊的下午茶</h3>
+                    <p>
+                        今天邀请了我的好朋友——毛绒熊先生一起喝下午茶。
+                        虽然他只会默默地坐在对面，但他的眼神里充满了温柔（大概吧）。
+                        我们分享了饼干和秘密，这个下午安静又美好 🫖
+                    </p>
+                    <a class="read-more" data-article="毛绒熊的下午茶">继续阅读 →</a>
+                    <span class="post-emoji">🐻</span>
+                </article>
+            </main>
+
+            <!-- ===== 右侧边栏 ===== -->
+            <aside class="sidebar">
+
+                <!-- 关于我 -->
+                <div class="sidebar-card about-me">
+                    <div class="mini-avatar">🧸</div>
+                    <h4>✨ 安缇欧娜 ✨</h4>
+                    <div class="bio">
+                        一个喜欢收集云朵、糖果和彩虹的幻想家 🌈<br />
+                        相信 <span>✨ 魔法 ✨</span> 就藏在生活的角落里
+                    </div>
+                </div>
+
+                <!-- 今日心情 -->
+                <div class="sidebar-card">
+                    <div class="card-title">
+                        <span>💖</span> 今日心情
+                    </div>
+                    <div class="mood-card">
+                        <div class="mood-emoji">☀️</div>
+                        <div class="mood-text">
+                            今天阳光超级好，心情像棉花糖一样蓬松～
+                            <small>—— 来自 安缇欧娜 的小广播</small>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 标签云 -->
+                <div class="sidebar-card">
+                    <div class="card-title">
+                        <span>🏷️</span> 标签云
+                    </div>
+                    <div class="tag-cloud">
+                        <span class="tag-item">🌸 日常</span>
+                        <span class="tag-item">🍓 美食</span>
+                        <span class="tag-item">🌙 幻想</span>
+                        <span class="tag-item">🧸 治愈</span>
+                        <span class="tag-item">🌈 彩虹</span>
+                        <span class="tag-item">☁️ 云朵</span>
+                        <span class="tag-item">🍬 糖果</span>
+                        <span class="tag-item">🦋 蝴蝶</span>
+                        <span class="tag-item">✨ 魔法</span>
+                    </div>
+                </div>
+
+                <!-- 小统计 -->
+                <div class="sidebar-card" style="background:linear-gradient(135deg,rgba(255,240,245,0.7),rgba(255,220,235,0.5));">
+                    <div class="card-title">
+                        <span>📊</span> 小站统计
+                    </div>
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;text-align:center;">
+                        <div style="background:rgba(255,255,255,0.4);border-radius:20px;padding:12px 6px;">
+                            <div style="font-size:26px;font-weight:700;color:#c44a8a;">24</div>
+                            <div style="font-size:13px;color:#8f6f8f;">文章</div>
+                        </div>
+                        <div style="background:rgba(255,255,255,0.4);border-radius:20px;padding:12px 6px;">
+                            <div style="font-size:26px;font-weight:700;color:#c44a8a;">156</div>
+                            <div style="font-size:13px;color:#8f6f8f;">糖果 💬</div>
+                        </div>
+                        <div style="background:rgba(255,255,255,0.4);border-radius:20px;padding:12px 6px;">
+                            <div style="font-size:26px;font-weight:700;color:#c44a8a;">8</div>
+                            <div style="font-size:13px;color:#8f6f8f;">标签</div>
+                        </div>
+                        <div style="background:rgba(255,255,255,0.4);border-radius:20px;padding:12px 6px;">
+                            <div style="font-size:26px;font-weight:700;color:#c44a8a;">❤️</div>
+                            <div style="font-size:13px;color:#8f6f8f;">小温暖</div>
+                        </div>
+                    </div>
+                </div>
+
+            </aside>
+        </div>
+
+        <!-- ===== 页脚 ===== -->
+        <footer class="footer">
+            <div>
+                © 2026 安缇欧娜的博客小站
+                <span class="footer-heart">❤️</span>
+                用满满的爱与糖果搭建
+            </div>
+            <div class="footer-links">
+                <a href="#">🍬 关于</a>
+                <a href="#">📮 联系</a>
+                <a href="#">🔮 友情链接</a>
+                <a href="#">🌈 小站地图</a>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- ===== Toast 消息 ===== -->
+    <div id="toast" class="toast-message">✨ 嘿～ 你戳到了我的小星星！</div>
+
+    <!-- ===== JavaScript ===== -->
+    <script>
+        (function() {
+            'use strict';
+
+            // ---------- 1. 显示当前日期 ----------
+            const dateEl = document.getElementById('currentDate');
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = String(now.getMonth() + 1).padStart(2, '0');
+            const day = String(now.getDate()).padStart(2, '0');
+            const weekdays = ['日', '一', '二', '三', '四', '五', '六'];
+            const wd = weekdays[now.getDay()];
+            dateEl.textContent = `📆 ${year} 年 ${month} 月 ${day} 日 · 星期${wd}`;
+
+            // ---------- 2. Toast 提示 ----------
+            const toast = document.getElementById('toast');
+            let toastTimer = null;
+
+            function showToast(message) {
+                toast.textContent = message || '✨ 嘿～ 你戳到了我的小星星！';
+                toast.classList.add('show');
+                clearTimeout(toastTimer);
+                toastTimer = setTimeout(() => {
+                    toast.classList.remove('show');
+                }, 2200);
+            }
+
+            // ---------- 3. 文章 "继续阅读" 点击 ----------
+            const readMoreLinks = document.querySelectorAll('.read-more');
+            readMoreLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const articleTitle = this.getAttribute('data-article') || '这篇文章';
+                    // 随机萌萌的回应
+                    const messages = [
+                        `📖 你正在阅读《${articleTitle}》～ 里面藏着小糖果哦！`,
+                        `🍬 点击了《${articleTitle}》！ 安缇欧娜给你比了个心～`,
+                        `✨ 《${articleTitle}》是一篇超可爱的小文章呢！`,
+                        `🌸 哇！你发现了《${articleTitle}》的秘密入口！`,
+                        `🧸 毛绒熊说：他也想读《${articleTitle}》！`,
+                    ];
+                    const msg = messages[Math.floor(Math.random() * messages.length)];
+                    showToast(msg);
+                });
+            });
+
+            // ---------- 4. 点击文章卡片本身也可以触发 ----------
+            const postCards = document.querySelectorAll('.post-card');
+            postCards.forEach(card => {
+                card.addEventListener('click', function(e) {
+                    // 如果点击的是 read-more 链接，已经触发过了，不重复
+                    if (e.target.classList.contains('read-more')) return;
+                    const title = this.getAttribute('data-title') || '这篇文章';
+                    const emojis = ['🌸', '🍬', '✨', '🧸', '🌈', '☁️', '🦋', '🍓'];
+                    const emoji = emojis[Math.floor(Math.random() * emojis.length)];
+                    showToast(`${emoji} 你轻轻戳了一下《${title}》～ 好萌！`);
+                });
+            });
+
+            // ---------- 5. 导航链接点击 ----------
+            const navLinks = document.querySelectorAll('.nav-links a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    this.classList.add('active');
+                    const text = this.textContent.trim();
+                    const msgs = {
+                        '🍬 首页': '🏠 回到首页啦～ 欢迎回来！',
+                        '📖 文章': '📚 文章列表正在加载中… 稍等哦！',
+                        '🎀 关于': '🧸 关于安缇欧娜：一个爱做梦的小女孩～',
+                        '💌 留言': '💬 你的留言会变成糖果飞进我的信箱！',
+                    };
+                    const msg = msgs[text] || `✨ 你点了「${text}」～ 好耶！`;
+                    showToast(msg);
+                });
+            });
+
+            // ---------- 6. 标签点击 ----------
+            const tagItems = document.querySelectorAll('.tag-item');
+            tagItems.forEach(tag => {
+                tag.addEventListener('click', function() {
+                    const label = this.textContent.trim();
+                    showToast(`🏷️ 你点击了标签「${label}」～ 相关文章正在赶来！`);
+                });
+            });
+
+            // ---------- 7. 页脚链接 ----------
+            const footerLinks = document.querySelectorAll('.footer-links a');
+            footerLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const label = this.textContent.trim();
+                    showToast(`🔮 「${label}」— 安缇欧娜说：下次再告诉你更多～`);
+                });
+            });
+
+            // ---------- 8. 欢迎横幅点击 ----------
+            const banner = document.querySelector('.welcome-banner');
+            if (banner) {
+                banner.addEventListener('click', function() {
+                    const msgs = [
+                        '🌸 欢迎来到安缇欧娜的糖果世界！',
+                        '✨ 今天的你也超级可爱！',
+                        '🍬 送你一颗隐形糖果～ 甜甜的！',
+                        '🧸 毛绒熊说：嗨～ 你好呀！',
+                        '🌈 愿你的每一天都有彩虹！',
+                    ];
+                    const msg = msgs[Math.floor(Math.random() * msgs.length)];
+                    showToast(msg);
+                });
+            }
+
+            // ---------- 9. 头像点击 ----------
+            const avatar = document.querySelector('.avatar');
+            if (avatar) {
+                avatar.addEventListener('click', function() {
+                    const msgs = [
+                        '🧸 哎呀～ 你摸到我的小脑袋啦！',
+                        '🌸 嘿嘿，安缇欧娜在对你笑呢！',
+                        '✨ 你获得了一个来自安缇欧娜的飞吻～ 💋',
+                        '🍬 点击头像会变幸运哦！今天也要加油！',
+                    ];
+                    const msg = msgs[Math.floor(Math.random() * msgs.length)];
+                    showToast(msg);
+                });
+            }
+
+            // ---------- 10. 控制台小彩蛋 ----------
+            console.log('%c🌸 欢迎来到安缇欧娜的博客小站！ 🌸', 'font-size:18px;color:#c44a8a;font-weight:bold;');
+            console.log('%c🧸 这里藏满了糖果和星星，慢慢探索吧～ ✨', 'font-size:14px;color:#8f6f8f;');
+
+            console.log('✨ 悄悄告诉你：点击页面上的任何可爱元素都有惊喜哦！');
+
+        })();
+    </script>
+
+</body>
+</html>
